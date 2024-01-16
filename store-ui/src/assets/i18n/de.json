@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "header": "Store",
+    "home": "Startseite",
+    "products": "Produkte",
+    "orders": "Bestellungen"
+  },
+  "view": {
+    "home": {
+      "welcome": "Wilkommen in meinem Store"
+    },
+    "product": {
+      "table": {
+        "header": {
+          "id": "Nummer",
+          "name": "Name",
+          "type": "Typ",
+          "count": "Anzahl",
+          "price": "Preis",
+          "tax": "Mwst"
+        },
+        "no-entries": "Es sind keine Produkte verfügbar"
+      }
+    }
+  }
+}

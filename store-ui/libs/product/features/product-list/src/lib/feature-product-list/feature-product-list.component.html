@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">{{ translate.instant('view.product.table.header.id') }}</th>
+    <th scope="col">{{ translate.instant('view.product.table.header.name') }}</th>
+    <th scope="col">{{ translate.instant('view.product.table.header.type') }}</th>
+    <th scope="col">{{ translate.instant('view.product.table.header.count') }}</th>
+    <th scope="col">{{ translate.instant('view.product.table.header.price') }}</th>
+    <th scope="col">{{ translate.instant('view.product.table.header.tax') }}</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (product of products$ | async; track product.id;) {
+      <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.type }}</td>
+        <td>{{ product.count }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.taxPercent }}</td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="6" style="text-align: center">{{ translate.instant('view.product.table.no-entries') }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
