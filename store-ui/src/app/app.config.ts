@@ -9,6 +9,7 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { ProductPort } from '@store-ui/product-domain';
 import { ProductProxy } from '../../libs/product/proxy/src/lib/product-proxy/ProductProxy';
+import { NgEventBus } from 'ng-event-bus';
 
 registerLocaleData(localeDeAt, 'de-AT');
 
@@ -28,6 +29,7 @@ function appInitializerFactory(translate: TranslateService) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    NgEventBus,
     // Injections for interfaces
     { provide: ProductPort, useExisting: ProductProxy },
     // Initializer for preloading the i18n files

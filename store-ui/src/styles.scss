@@ -26,3 +26,12 @@ $theme-colors: (
 );
 
 @import 'bootstrap/scss/bootstrap';
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.content-full-height {
+  height: 90vh;
+}

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { translate } from '@angular/localize/tools';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

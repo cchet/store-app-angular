@@ -4,20 +4,20 @@
     <th scope="col">{{ translate.instant('view.product.table.header.id') }}</th>
     <th scope="col">{{ translate.instant('view.product.table.header.name') }}</th>
     <th scope="col">{{ translate.instant('view.product.table.header.type') }}</th>
-    <th scope="col">{{ translate.instant('view.product.table.header.count') }}</th>
     <th scope="col">{{ translate.instant('view.product.table.header.price') }}</th>
     <th scope="col">{{ translate.instant('view.product.table.header.tax') }}</th>
+    <th scope="col">{{ translate.instant('view.product.table.header.count') }}</th>
   </tr>
   </thead>
   <tbody>
     @for (product of products$ | async; track product.id;) {
       <tr>
-        <td>{{ product.id }}</td>
+        <td><a [routerLink]="'/product/' + product.id" class="detail-link"><fa-icon [icon]="iconDetail"></fa-icon></a>{{ product.id }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.type }}</td>
-        <td>{{ product.count }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.taxPercent }}</td>
+        <td>{{ product.count }}</td>
       </tr>
     } @empty {
       <tr>

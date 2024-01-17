@@ -1,9 +1,9 @@
 export const globalConfiguration = {
-  PAGE_LINKS: {
+  NAV_LINKS: {
     home: {
       i18n: 'nav.home',
       uri:
-        'start'
+        'home'
     },
     products: {
       i18n: 'nav.products',
@@ -15,5 +15,8 @@ export const globalConfiguration = {
       uri:
         'orders'
     }
+  },
+  PAGE_ROUTER_URI: {
+    product: 'product/:id'
   }
 };
