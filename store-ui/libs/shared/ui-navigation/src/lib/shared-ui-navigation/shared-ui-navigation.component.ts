@@ -19,9 +19,9 @@ export class SharedUiNavigationComponent {
   readonly navigationLinks = new Array<Link>();
 
   constructor(protected translate: TranslateService) {
-    const keys = Object.keys(globalConfiguration.NAV_LINKS) as Array<keyof typeof globalConfiguration.NAV_LINKS>;
+    const keys = Object.keys(globalConfiguration.navLinks) as Array<keyof typeof globalConfiguration.navLinks>;
     keys.forEach(key => {
-      const pageLink = globalConfiguration.NAV_LINKS[key];
+      const pageLink = globalConfiguration.navLinks[key];
       this.navigationLinks.push({ name: translate.instant(pageLink.i18n), uri: pageLink.uri });
     });
   }

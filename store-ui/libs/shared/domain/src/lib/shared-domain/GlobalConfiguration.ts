@@ -1,5 +1,5 @@
 export const globalConfiguration = {
-  NAV_LINKS: {
+  navLinks: {
     home: {
       i18n: 'nav.home',
       uri:

@@ -25,11 +25,19 @@
                 "onlyDependOnLibsWithTags": ["scope:product",  "scope:shared"]
               },
               {
+                "sourceTag": "scope:cart",
+                "onlyDependOnLibsWithTags": ["scope:cart", "scope:product",  "scope:shared"]
+              },
+              {
                 "sourceTag": "type:domain",
                 "onlyDependOnLibsWithTags": ["type:util", "type:domain"]
               },
               {
                 "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": ["type:util", "type:domain", "type:state"]
+              },
+              {
+                "sourceTag": "type:state",
                 "onlyDependOnLibsWithTags": ["type:util", "type:domain"]
               },
               {

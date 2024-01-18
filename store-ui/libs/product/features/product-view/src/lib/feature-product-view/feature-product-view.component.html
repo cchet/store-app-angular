@@ -1,33 +1,37 @@
-<div class="d-flex flex-column justify-content-center align-items-center content-full-height border border-1">
-  <h3 class="text-primary">Produktdaten</h3>
+@if (product !== undefined) {
+  <h3 class="text-primary">{{ product.id }} - {{ product.name }}</h3>
   <div class="d-flex flex-row w-100 justify-content-center align-items-center">
-    <div class="d-flex flex-column gap-2 me-2 text-end fw-bold w-50">
-      <label for="productId">Id:</label>
-      <label for="productName">Name:</label>
+    <div class="d-flex flex-column gap-1 me-2 text-end fw-bold w-50">
       <label for="productPriceWithoutTax">Netto:</label>
       <label for="productTax">MWST:</label>
       <label for="productPriceWithTax">Brutto:</label>
     </div>
-    <div class="d-flex flex-column gap-2 ms-2 text-start w-50">
-      <span id="productId">00000001</span>
-      <span id="productName">MAC</span>
-      <span id="productPriceWithoutTax">1.00</span>
-      <span id="productTax">20.00</span>
-      <span id="productPriceWithTax">1.20</span>
+    <div class="d-flex flex-column gap-1 ms-2 text-start w-50">
+      <span id="productPriceWithoutTax">{{ product.price | currency }}</span>
+      <span id="productTax">{{ product.taxPercent |  percent:'.2' }}</span>
+      <span
+        id="productPriceWithTax">{{ product.calculatePriceWithTax() | currency }}</span>
     </div>
   </div>
 
-  <form [formGroup]="addToChartForm" (ngSubmit)="onSubmit()" novalidate>
+  <form [formGroup]="addToChartForm" (ngSubmit)="onSubmit(product.id)" novalidate>
     <div class="d-flex flex-row w-100 justify-content-center align-items-center mt-3 gap-2">
       <div class="input-group input-count">
         <span class="input-group-text" id="basic-addon1">Anzahl</span>
         <input type="number" class="form-control" id="count" name="count" formControlName="count" min="1"
                max="{{ product.count }}" />
       </div>
-      <button type="submit" class="btn btn-outline-secondary" [disabled]="addToChartForm.invalid">In den Warenkorb</button>
+      <button type="submit" class="btn btn-outline-primary" [disabled]="addToChartForm.invalid">In den Warenkorb
+      </button>
     </div>
   </form>
   <div class="mt-3">
-    <ngb-alert #successAlert *ngIf="productAdded" type="success" (closed)="onSuccessAlertClosed()" [dismissible]="false">Das Produkt wurde dem Warenkorb hinzugefügt</ngb-alert>
+    <ngb-alert #successAlert *ngIf="productAdded" type="success" (closed)="onSuccessAlertClosed()"
+               [dismissible]="false">Das Produkt wurde dem Warenkorb hinzugefügt
+    </ngb-alert>
   </div>
-</div>
+} @else if (isLoading()) {
+  <h2>Loading...</h2>
+} @else if (isFailed()) {
+  <h2>Product kann nicht angezeigt werden</h2>
+}

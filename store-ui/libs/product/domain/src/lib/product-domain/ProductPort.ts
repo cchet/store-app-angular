@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 export abstract class ProductPort {
   abstract list(): Observable<Product[]>;
 
+  abstract byId(id: string | null): Observable<Product>;
+
   abstract byIds(ids: string[]): Observable<Product[]>;
 }
 

@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Product, ProductEvent, ProductEventType, ProductType } from '@store-ui/product-domain';
-import { MetaData, NgEventBus } from 'ng-event-bus';
+import { Product, ProductEventType, ProductPort } from '@store-ui/product-domain';
+import { NgEventBus } from 'ng-event-bus';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { filter, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'store-ui-feature-product-view',
@@ -13,57 +14,46 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './feature-product-view.component.html',
   styleUrl: './feature-product-view.component.css'
 })
-export class FeatureProductViewComponent {
+export class FeatureProductViewComponent implements OnInit {
 
-  @ViewChild('successAlert', { static: false }) successAlert!: NgbAlert;
+  @ViewChild('successAlert', { static: false }) successAlert: NgbAlert | undefined;
 
+  protected loadFailed: boolean = false;
   protected productAdded = false;
-  readonly product: Product;
-  protected addToChartForm: FormGroup;
-  private timeoutId?: number | undefined;
+  protected product: Product | undefined;
+  protected addToChartForm: FormGroup = this.formBuilder.group({
+    count: new FormControl(1, [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(10)
+    ])
+  });
+  private timeoutId: number | undefined;
 
   constructor(private formBuilder: FormBuilder,
+              private productPort: ProductPort,
               private activatedRoute: ActivatedRoute,
               private eventBus: NgEventBus) {
-    this.product = {
-      id: '00000001',
-      name: 'MAC Book Pro 16',
-      type: ProductType.LAPTOP,
-      count: 10,
-      price: 5000.00,
-      taxPercent: 20.00
-    };
-
-    this.addToChartForm = this.formBuilder.group({
-      count: new FormControl(1, [
-        Validators.required,
-        Validators.min(1),
-        Validators.max(this.product.count)
-      ])
-    });
-
-    eventBus.on(ProductEventType.PRODUCT_ADDED).subscribe(this.onProductAdded);
   }
 
-  onSubmit(): void {
+  ngOnInit(): void {
+    this.activatedRoute.params
+      .pipe(map(params => params['id']))
+      .pipe(filter(id => id !== undefined))
+      .pipe(switchMap(id => this.productPort.byId(id)))
+      .subscribe({
+        next: product => this.product = product,
+        error: () => this.loadFailed = true
+      });
+  }
+
+  onSubmit(id: string): void {
     this.onSubmitStart();
-    const productEvent: ProductEvent = {
-      id: this.product.id,
+    this.eventBus.cast(ProductEventType.PRODUCT_ADDED, {
+      id: id,
       count: this.addToChartForm.controls['count'].value
-    };
-    this.eventBus.cast(ProductEventType.PRODUCT_ADDED, productEvent);
+    });
     this.onSubmitSuccess();
-  }
-
-  private onSubmitStart(): void {
-    this.productAdded = false;
-    clearTimeout(this.timeoutId);
-  }
-
-  private onSubmitSuccess(): void {
-    this.productAdded = true;
-    this.timeoutId = setTimeout(() => this.successAlert?.close(), 3000);
-    this.addToChartForm.reset({ count: 1 });
   }
 
   onSuccessAlertClosed(): void {
@@ -71,7 +61,23 @@ export class FeatureProductViewComponent {
     this.timeoutId = undefined;
   }
 
-  onProductAdded(meta: MetaData): void {
-    console.log(meta);
+  isLoading(): boolean {
+    return this.product === undefined && !this.loadFailed;
+  }
+
+  isFailed(): boolean {
+    return this.product === undefined && this.loadFailed;
+  }
+
+  private onSubmitStart(): void {
+    this.productAdded = false;
+    clearTimeout(this.timeoutId);
+    this.timeoutId = undefined;
+  }
+
+  private onSubmitSuccess(): void {
+    this.productAdded = true;
+    this.timeoutId = setTimeout(() => this.successAlert?.close(), 3000);
+    this.addToChartForm?.reset({ count: 1 });
   }
 }

@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@store-ui/api": ["libs/order/api/src/index.ts"],
+      "@store-ui/cart-domain": ["libs/cart/domain/src/index.ts"],
+      "@store-ui/cart-state": ["libs/cart/state/src/index.ts"],
       "@store-ui/domain": ["libs/order/domain/src/index.ts"],
       "@store-ui/feature-product-list": [
         "libs/product/features/product-list/src/index.ts"

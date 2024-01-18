@@ -4,11 +4,18 @@ export enum ProductType {
   HID,
 }
 
-export interface Product {
-  id: string,
-  name: string,
-  count: number,
-  type: ProductType,
-  price: number,
-  taxPercent: number,
+export class Product {
+
+  constructor(readonly id: string,
+              readonly name: string,
+              readonly count: number,
+              readonly type: ProductType,
+              readonly price: number,
+              readonly taxPercent: number) {
+    this.taxPercent = taxPercent / 100;
+  }
+
+  calculatePriceWithTax(): number {
+    return this.price * (1 + this.taxPercent);
+  }
 }

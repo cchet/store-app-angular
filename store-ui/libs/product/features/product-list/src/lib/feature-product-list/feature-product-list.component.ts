@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product, ProductPort } from '@store-ui/product-domain';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
 })
 export class FeatureProductListComponent implements OnInit {
 
-  protected products$: Observable<Array<Product>> = of([]);
+  protected products$: Observable<Array<Product>> | undefined;
   protected readonly iconDetail = faEye;
 
   constructor(private productPort: ProductPort,

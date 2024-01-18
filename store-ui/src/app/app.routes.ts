@@ -8,15 +8,15 @@ import { UiProductViewComponent } from '@store-ui/ui-product-view';
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: globalConfiguration.NAV_LINKS.home.uri,
+    redirectTo: globalConfiguration.navLinks.home.uri,
     pathMatch: 'full',
   },
   {
-    path: globalConfiguration.NAV_LINKS.home.uri,
+    path: globalConfiguration.navLinks.home.uri,
     component: HomeUiComponent,
   },
   {
-    path: globalConfiguration.NAV_LINKS.products.uri,
+    path: globalConfiguration.navLinks.products.uri,
     component: UiProductsViewComponent,
   },
   {
@@ -24,7 +24,7 @@ export const appRoutes: Route[] = [
     component: UiProductViewComponent,
   },
   {
-    path: globalConfiguration.NAV_LINKS.orders.uri,
+    path: globalConfiguration.navLinks.orders.uri,
     component: OrderUiComponent,
   },
 ];
