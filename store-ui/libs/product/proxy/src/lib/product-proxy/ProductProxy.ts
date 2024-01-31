@@ -1,51 +1,48 @@
 import { Product, ProductPort, ProductType } from '@store-ui/product-domain';
-import { delay, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { StoreConfigPort } from '@store-ui/shared-model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+interface ProductRest {
+  id: string,
+  name: string,
+  count: number,
+  price: number,
+  taxPercent: number
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductProxy extends ProductPort {
 
-  readonly testData: Product[] = [
-    new Product(
-      '00000001',
-      'MAC Book Pro 16',
-      10,
-      ProductType.LAPTOP,
-      5000.00,
-      20.00),
-    new Product(
-      '00000002',
-      'MAC Book Pro 14',
-      10,
-      ProductType.LAPTOP,
-      4000.00,
-      20.00),
-    new Product(
-      '00000003',
-      'Lenovo',
-      10,
-      ProductType.LAPTOP,
-      2000.00,
-      20.00)
-  ];
-
+  constructor(private storeConfig: StoreConfigPort,
+              private httpClient: HttpClient) {
+    super();
+  }
 
   byId(id: string): Observable<Product> {
-    const products = this.testData.filter(product => id === product.id);
-    if(products.length === 1) {
-      return of(products[0]).pipe(delay(2000));
-    }
-    console.log("data not found for id: " + id);
-    return of();
+    return this.httpClient.get<ProductRest>(`${this.storeConfig.catalogBaseUrl()}/product/${id}`)
+      .pipe(map(p => new Product(p.id, p.name, p.count, ProductType.DESKTOP, p.price, p.taxPercent)))
+      .pipe(catchError(errorResponse => {
+        throw this.handleHttpError(errorResponse);
+      }));
   }
 
   byIds(ids: string[]): Observable<Product[]> {
-    return of(this.testData.filter(product => ids.includes(product.id)));
+    return of([]);
   }
 
   list(): Observable<Product[]> {
-    return of(this.testData);
+    return this.httpClient.get<Array<ProductRest>>(`${this.storeConfig.catalogBaseUrl()}/product`)
+      .pipe(map(products => products.map(p => new Product(p.id, p.name, p.count, ProductType.DESKTOP, p.price, p.taxPercent))))
+      .pipe(catchError(errorResponse => {
+        throw this.handleHttpError(errorResponse);
+      }));
+  }
+
+  private handleHttpError(errorResponse: HttpErrorResponse): Observable<Error> {
+    return throwError(() => new Error(`http-status: ${errorResponse.status}`));
   }
 }

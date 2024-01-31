@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product, ProductEventType, ProductPort } from '@store-ui/product-domain';
 import { NgEventBus } from 'ng-event-bus';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import { filter, map, switchMap } from 'rxjs';
+import { EMPTY, filter, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'store-ui-feature-product-view',
@@ -43,7 +43,10 @@ export class FeatureProductViewComponent implements OnInit {
       .pipe(switchMap(id => this.productPort.byId(id)))
       .subscribe({
         next: product => this.product = product,
-        error: () => this.loadFailed = true
+        error: (error) => {
+          this.loadFailed = true;
+          console.error(error);
+        }
       });
   }
 
