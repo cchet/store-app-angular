@@ -41,13 +41,13 @@ class ProductEntity {
     @DecimalMax("100.00")
     public BigDecimal taxPercent;
 
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime creationDate;
+    public LocalDateTime creationDate;
 
     @Column(name = "modification_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime modificationDate;
+    public LocalDateTime modificationDate;
 
     @PreUpdate
     void onUpdate() {

@@ -1,16 +1,40 @@
 version: '3.8'
 
 services:
-  warehouse-db:
+  catalog-db:
     image: postgres:alpine3.19
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
       POSTGRES_DB: warehouse
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - catalog-db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
+  order-db:
+    image: postgres:alpine3.19
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: order
+    volumes:
+      - order-db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+  messaging:
+    image: rabbitmq:3.9.29-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - messaging:/var/lib/rabbitmq/
+      - ./messaging/conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./messaging/conf/definitions.json:/import/definitions.json:ro
 volumes:
-  pgdata:
+  catalog-db:
+  order-db:
+  messaging:
