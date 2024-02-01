@@ -4,7 +4,7 @@ import at.ihet.store.electronic.service.order.domain.event.OrderCreatedEvent;
 import at.ihet.store.electronic.service.order.domain.port.OrderEventPublisher;
 import at.ihet.store.electronic.service.order.shared.ApplicationConfiguration;
 import org.slf4j.Logger;
-import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -12,22 +12,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-class AmqpEventPublisher implements OrderEventPublisher {
+class RabbitOrderEventPublisher implements OrderEventPublisher {
 
     private final ApplicationConfiguration applicationConfiguration;
     private final Logger log;
-    private final AmqpTemplate amqpTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     @Autowired
-    AmqpEventPublisher(ApplicationConfiguration applicationConfiguration, Logger log, AmqpTemplate amqpTemplate) {
+    RabbitOrderEventPublisher(ApplicationConfiguration applicationConfiguration, Logger log, RabbitTemplate rabbitTemplate) {
         this.applicationConfiguration = applicationConfiguration;
         this.log = log;
-        this.amqpTemplate = amqpTemplate;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Override
     public void publishOrderCreated(OrderCreatedEvent event) {
-        amqpTemplate.convertAndSend(applicationConfiguration.queueNameInbound, event.orderId.toString());
-        log.info("Published orderId to queue " + applicationConfiguration.queueNameInbound);
+        var rabbitOrderEvent = OrderEvent.orderEventCreated(event.orderId);
+        rabbitTemplate.convertAndSend(applicationConfiguration.queueNameOutbound, rabbitOrderEvent);
+        log.info("Published orderId to queue " + applicationConfiguration.queueNameOutbound);
     }
 }

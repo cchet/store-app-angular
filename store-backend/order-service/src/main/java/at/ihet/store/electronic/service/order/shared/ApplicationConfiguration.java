@@ -11,4 +11,7 @@ public class ApplicationConfiguration {
 
     @Value("${order.queue.inbound}")
     public String queueNameInbound;
+
+    @Value("${order.queue.outbound}")
+    public String queueNameOutbound;
 }
