@@ -26,9 +26,9 @@ class RabbitOrderEventPublisher implements OrderEventPublisher {
     }
 
     @Override
-    public void publishOrderCreated(OrderCreatedEvent event) {
-        var rabbitOrderEvent = OrderEvent.orderEventCreated(event.orderId);
-        rabbitTemplate.convertAndSend(applicationConfiguration.queueNameOutbound, rabbitOrderEvent);
-        log.info("Published orderId to queue " + applicationConfiguration.queueNameOutbound);
+    public void publishOrderCreated(final OrderCreatedEvent event) {
+        var startPayment = PaymentEvent.paymentStartEvent(event.orderId(), event.amount());
+        rabbitTemplate.convertAndSend(applicationConfiguration.queueNamePayment, startPayment);
+        log.info("Notify payment queue to start payment process for orderId: " + event.orderId());
     }
 }

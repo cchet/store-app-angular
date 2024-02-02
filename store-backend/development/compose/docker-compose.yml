@@ -21,6 +21,16 @@ services:
       - order-db:/var/lib/postgresql/data
     ports:
       - "5433:5432"
+  payment-db:
+    image: postgres:alpine3.19
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: payment
+    volumes:
+      - payment-db:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
   messaging:
     image: rabbitmq:3.9.29-management-alpine
     container_name: 'rabbitmq'
@@ -37,4 +47,5 @@ services:
 volumes:
   catalog-db:
   order-db:
+  payment-db:
   messaging:

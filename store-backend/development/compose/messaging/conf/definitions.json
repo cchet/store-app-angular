@@ -39,7 +39,7 @@
   "policies": [],
   "queues": [
     {
-      "name": "order-outbound",
+      "name": "order",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
@@ -48,7 +48,16 @@
       }
     },
     {
-      "name": "order-inbound",
+      "name": "payment",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "catalog",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,

@@ -1,4 +1,4 @@
-package at.ihet.store.electronic.service.order;
+package at.ihet.store.electronic.service.payment;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
-    @Value("${order.cors.allowed-origins}")
+    @Value("${payment.cors.allowed-origins}")
     private String corsAllowedOrigins;
 
     @Override

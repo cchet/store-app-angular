@@ -36,7 +36,7 @@ class CreateOrderCommandHandler implements CreateOrderCommand {
         var order = Order.newOrder();
         request.items().forEach(item -> order.addOrderItem(OrderItem.create(item.productId(), item.count(), BigDecimal.TEN)));
         validator.validate(order);
-        eventPublisher.publishEvent(OrderCreatedEvent.of(order.getId()));
+        eventPublisher.publishEvent(OrderCreatedEvent.of(order.getId(), order.amount()));
 
         return orderRepository.create(order);
     }

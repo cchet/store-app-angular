@@ -1,4 +1,4 @@
-package at.ihet.store.electronic.service.order.shared;
+package at.ihet.store.electronic.service.payment.shared;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -9,9 +9,15 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class ApplicationConfiguration {
 
-    @Value("${order.queue.order}")
+    @Value("${payment.queue.order}")
     public String queueNameOrder;
 
-    @Value("${order.queue.payment}")
+    @Value("${payment.queue.payment}")
     public String queueNamePayment;
+
+    @Value("${payment.queue.catalog}")
+    public String queueNameCatalog;
+
+    @Value("${payment.max-pending-payment-seconds}")
+    public Integer maxPendingPaymentSeconds;
 }

@@ -3,6 +3,7 @@ package at.ihet.store.electronic.service.order.domain;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Order {
@@ -28,6 +29,10 @@ public class Order {
     public void addOrderItem(final OrderItem orderItem) {
         Objects.requireNonNull(orderItem, "OrderItem must not be null");
         orderItemForProductId(orderItem.getProductId()).ifPresentOrElse(OrderItem::increaseCount, () -> items.add(orderItem));
+    }
+
+    public BigDecimal amount() {
+        return items.stream().map(OrderItem::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     private Optional<OrderItem> orderItemForProductId(final String productId) {

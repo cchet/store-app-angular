@@ -18,7 +18,7 @@ public class RabbitOrderEventListener {
         this.log = log;
     }
 
-    @RabbitListener(queues = "order-inbound")
+    @RabbitListener(queues = "${order.queue.order}")
     void receiveOrderEvent(final OrderEvent event) {
         log.info(event.toString());
     }
