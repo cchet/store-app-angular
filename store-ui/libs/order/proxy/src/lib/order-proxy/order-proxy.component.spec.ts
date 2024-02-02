@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DomainComponent } from './domain.component';
+import { OrderProxyComponent } from './order-proxy.component';
 
-describe('DomainComponent', () => {
-  let component: DomainComponent;
-  let fixture: ComponentFixture<DomainComponent>;
+describe('OrderProxyComponent', () => {
+  let component: OrderProxyComponent;
+  let fixture: ComponentFixture<OrderProxyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DomainComponent],
+      imports: [OrderProxyComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DomainComponent);
+    fixture = TestBed.createComponent(OrderProxyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

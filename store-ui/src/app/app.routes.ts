@@ -4,6 +4,7 @@ import { OrderUiComponent } from '@store-ui/ui';
 import { HomeUiComponent } from '@store-ui/home-ui';
 import { UiProductsViewComponent } from '@store-ui/ui-products-view';
 import { UiProductViewComponent } from '@store-ui/ui-product-view';
+import { CartViewComponent } from '@store-ui/cart-view';
 
 export const appRoutes: Route[] = [
   {
@@ -20,11 +21,15 @@ export const appRoutes: Route[] = [
     component: UiProductsViewComponent,
   },
   {
-    path: globalConfiguration.PAGE_ROUTER_URI.product,
-    component: UiProductViewComponent,
-  },
-  {
     path: globalConfiguration.navLinks.orders.uri,
     component: OrderUiComponent,
+  },
+  {
+    path: globalConfiguration.navLinks.cart.uri,
+    component: CartViewComponent,
+  },
+  {
+    path: globalConfiguration.PAGE_ROUTER_URI.product,
+    component: UiProductViewComponent,
   },
 ];

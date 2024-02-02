@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/product/proxy/src",
   "prefix": "store-ui",
-  "tags": [],
+  "tags": ["scope:order", "type:proxy"],
   "projectType": "library",
   "targets": {
     "test": {

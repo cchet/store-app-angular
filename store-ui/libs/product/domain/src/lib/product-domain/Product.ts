@@ -16,6 +16,10 @@ export class Product {
   }
 
   calculatePriceWithTax(): number {
-    return this.price * (1 + this.taxPercent);
+    return this.price + this.calculateTax();
+  }
+
+  calculateTax(): number {
+    return this.price * this.taxPercent;
   }
 }

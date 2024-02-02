@@ -4,16 +4,14 @@ import at.ihet.store.electronic.service.catalog.product.application.query.Produc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/product")
+@RequestMapping(path = "/product",produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductApi {
 
     private final ProductQuery productQuery;
@@ -25,9 +23,9 @@ public class ProductApi {
         this.productViewMapper = productViewMapper;
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    List<ProductView> list() {
-        var products = productQuery.listAll();
+    @GetMapping()
+    List<ProductView> list(@RequestParam(value = "id", required = false) List<String> ids) {
+        var products = (ids == null) ? productQuery.listAll() : productQuery.findByIds(ids);
         return productViewMapper.toProductViews(products);
     }
 

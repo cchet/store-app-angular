@@ -1,0 +1,43 @@
+<table class="table table-striped text-center">
+  <thead>
+  <tr>
+    <th scope="col">{{ translate.instant('view.cart.table.header.productId') }}</th>
+    <th scope="col">{{ translate.instant('view.cart.table.header.name') }}</th>
+    <th scope="col">{{ translate.instant('view.cart.table.header.singlePrice') }}</th>
+    <th scope="col">{{ translate.instant('view.cart.table.header.singleTax') }}</th>
+    <th scope="col">{{ translate.instant('view.cart.table.header.count') }}</th>
+    <th scope="col">{{ translate.instant('view.cart.table.header.fullPriceNoTax') }}</th>
+    <th scope="col">{{ translate.instant('view.cart.table.header.fullTax') }}</th>
+    <th scope="col">{{ translate.instant('view.cart.table.header.fullPrice') }}</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (item of cartProducts$ | async; track item.product.id; ) {
+      <tr>
+        <td>{{ item.product.id }}</td>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.price | currency }}</td>
+        <td class="text-end">{{ item.product.calculateTax() | currency }} ({{ item.product.taxPercent |  percent:'.2' }})</td>
+        <td>{{ item.count }}</td>
+        <td class="text-end">{{ item.fullPriceNoTax() | currency }}</td>
+        <td class="text-end">{{ item.fullTax() | currency }}</td>
+        <td class="text-end">{{ item.fullPrice() | currency }}</td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="8" style="text-align: center">{{ translate.instant('view.product.table.no-entries') }}</td>
+      </tr>
+    }
+  </tbody>
+  <tfoot>
+  <tr>
+    <td colspan="2" class="text-end fw-bold border-end">{{ translate.instant('view.cart.table.footer.total') }}:</td>
+    <td class="fw-bold border-end text-end">{{ tableResult.totalSinglePriceNoTax | currency }}</td>
+    <td class="fw-bold border-end text-end">{{ tableResult.totalSingleTax | currency }}</td>
+    <td class="fw-bold border-end">{{ tableResult.totalCount }}</td>
+    <td class="fw-bold border-end text-end">{{ tableResult.totalFullPriceNoTax | currency }}</td>
+    <td class="fw-bold border-end text-end">{{ tableResult.totalFullTax | currency }}</td>
+    <td class="fw-bold border-end text-end">{{ tableResult.totalFullPrice | currency }}</td>
+  </tr>
+  </tfoot>
+</table>

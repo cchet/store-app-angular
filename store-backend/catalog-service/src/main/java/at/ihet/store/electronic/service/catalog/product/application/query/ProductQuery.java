@@ -8,4 +8,6 @@ public interface ProductQuery {
     List<ProductDto> listAll();
 
     Optional<ProductDto> findById(String id);
+
+    List<ProductDto> findByIds(List<String> ids);
 }

@@ -14,6 +14,11 @@ export const globalConfiguration = {
       i18n: 'nav.orders',
       uri:
         'orders'
+    },
+    cart: {
+      i18n: 'nav.cart',
+      uri:
+        'cart'
     }
   },
   PAGE_ROUTER_URI: {

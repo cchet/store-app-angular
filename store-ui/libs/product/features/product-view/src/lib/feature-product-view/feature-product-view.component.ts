@@ -5,7 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Product, ProductEventType, ProductPort } from '@store-ui/product-domain';
 import { NgEventBus } from 'ng-event-bus';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import { EMPTY, filter, map, switchMap } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'store-ui-feature-product-view',
@@ -30,7 +31,8 @@ export class FeatureProductViewComponent implements OnInit {
   });
   private timeoutId: number | undefined;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(protected translate:TranslateService,
+              private formBuilder: FormBuilder,
               private productPort: ProductPort,
               private activatedRoute: ActivatedRoute,
               private eventBus: NgEventBus) {

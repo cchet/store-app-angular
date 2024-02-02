@@ -8,9 +8,19 @@
     <!-- Step 2: Add the ngbCollapse directive to the element below. -->
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul class="navbar-nav">
-        <li *ngFor="let link of navigationLinks" class="nav-item" routerLinkActive="active">
-          <!-- Step 4: Close the menu when a link is clicked. -->
-          <a class="nav-link" [routerLink]="link.uri" (click)="isMenuCollapsed = true">{{ link.name }}</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="globalConfiguration.navLinks.home.uri" (click)="isMenuCollapsed = true">{{ translate.instant(globalConfiguration.navLinks.home.i18n) }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="globalConfiguration.navLinks.products.uri" (click)="isMenuCollapsed = true">{{ translate.instant(globalConfiguration.navLinks.products.i18n) }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="globalConfiguration.navLinks.orders.uri" (click)="isMenuCollapsed = true">{{ translate.instant(globalConfiguration.navLinks.orders.i18n) }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="globalConfiguration.navLinks.cart.uri" (click)="isMenuCollapsed = true" title="{{ translate.instant(globalConfiguration.navLinks.cart.i18n) }}">
+            <fa-icon [icon]="iconBasket"></fa-icon>
+          </a>
         </li>
       </ul>
     </div>

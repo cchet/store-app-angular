@@ -8,5 +8,11 @@ export abstract class CartPort {
 
   abstract removeAll(): void;
 
+  abstract forId(id:string): CartItem;
+
   abstract list(): readonly CartItem[];
+
+  abstract listProductIds():readonly string[];
+
+  abstract isEmpty():boolean;
 }

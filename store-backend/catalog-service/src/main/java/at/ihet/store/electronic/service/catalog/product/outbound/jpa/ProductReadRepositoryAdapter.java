@@ -33,4 +33,10 @@ class ProductReadRepositoryAdapter implements ProductReadRepository {
         var jpaEntity = jpaProductRepository.findById(id).orElse(null);
         return (jpaEntity != null) ? productDtoMapper.toDto(jpaEntity) : null;
     }
+
+    @Override
+    public List<ProductDto> byIds(List<String> id) {
+        var jpaEntities = jpaProductRepository.findAllById(id);
+        return productDtoMapper.toDtos(jpaEntities);
+    }
 }

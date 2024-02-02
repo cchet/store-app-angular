@@ -1,8 +1,8 @@
 import { Product, ProductPort, ProductType } from '@store-ui/product-domain';
-import { catchError, map, Observable, of, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { StoreConfigPort } from '@store-ui/shared-model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 interface ProductRest {
   id: string,
@@ -30,8 +30,15 @@ export class ProductProxy extends ProductPort {
       }));
   }
 
-  byIds(ids: string[]): Observable<Product[]> {
-    return of([]);
+  byIds(ids: readonly string[]): Observable<Product[]> {
+    const params = new HttpParams({ fromObject: { id: ids } })
+    console.log(params);
+
+    return this.httpClient.get<Array<ProductRest>>(`${this.storeConfig.catalogBaseUrl()}/product`, { params: params })
+      .pipe(map(products => products.map(p => new Product(p.id, p.name, p.count, ProductType.DESKTOP, p.price, p.taxPercent))))
+      .pipe(catchError(errorResponse => {
+        throw this.handleHttpError(errorResponse);
+      }));
   }
 
   list(): Observable<Product[]> {

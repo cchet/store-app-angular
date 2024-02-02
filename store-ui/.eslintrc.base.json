@@ -26,7 +26,7 @@
               },
               {
                 "sourceTag": "scope:cart",
-                "onlyDependOnLibsWithTags": ["scope:cart", "scope:product",  "scope:shared"]
+                "onlyDependOnLibsWithTags": ["scope:cart", "scope:product", "scope:order",  "scope:shared"]
               },
               {
                 "sourceTag": "type:domain",
@@ -34,7 +34,7 @@
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:util", "type:domain", "type:state"]
+                "onlyDependOnLibsWithTags": ["type:util", "type:domain", "type:state", "type:proxy"]
               },
               {
                 "sourceTag": "type:state",
@@ -50,7 +50,7 @@
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:util", "type:api", "type:domain"]
+                "onlyDependOnLibsWithTags": ["type:util", "type:api", "type:domain", "type:feature"]
               },
               {
                 "sourceTag": "*",

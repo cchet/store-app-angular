@@ -12,6 +12,7 @@ $danger:        $red;
 $light:         $gray-100;
 $dark:          $gray-900;
 
+$navbar-light-active-color: $secondary;
 //futhermore it's necesary override the $theme-colors
 
 $theme-colors: (
@@ -26,6 +27,10 @@ $theme-colors: (
 );
 
 @import 'bootstrap/scss/bootstrap';
+
+root {
+  --bs-navbar-active-color: $primary
+}
 
 body {
   height: 100%;

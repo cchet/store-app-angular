@@ -1,12 +1,12 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th scope="col">{{ translate.instant('view.product.table.header.id') }}</th>
-    <th scope="col">{{ translate.instant('view.product.table.header.name') }}</th>
-    <th scope="col">{{ translate.instant('view.product.table.header.type') }}</th>
-    <th scope="col">{{ translate.instant('view.product.table.header.price') }}</th>
-    <th scope="col">{{ translate.instant('view.product.table.header.tax') }}</th>
-    <th scope="col">{{ translate.instant('view.product.table.header.count') }}</th>
+    <th scope="col">{{ translate.instant('view.products.table.header.id') }}</th>
+    <th scope="col">{{ translate.instant('view.products.table.header.name') }}</th>
+    <th scope="col">{{ translate.instant('view.products.table.header.type') }}</th>
+    <th scope="col">{{ translate.instant('view.products.table.header.price') }}</th>
+    <th scope="col">{{ translate.instant('view.products.table.header.tax') }}</th>
+    <th scope="col">{{ translate.instant('view.products.table.header.count') }}</th>
   </tr>
   </thead>
   <tbody>
@@ -15,13 +15,13 @@
         <td><a [routerLink]="'/product/' + product.id" class="detail-link"><fa-icon [icon]="iconDetail"></fa-icon></a>{{ product.id }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.type }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.taxPercent }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.taxPercent |  percent:'.2' }}</td>
         <td>{{ product.count }}</td>
       </tr>
     } @empty {
       <tr>
-        <td colspan="6" style="text-align: center">{{ translate.instant('view.product.table.no-entries') }}</td>
+        <td colspan="6" style="text-align: center">{{ translate.instant('view.products.table.no-entries') }}</td>
       </tr>
     }
   </tbody>

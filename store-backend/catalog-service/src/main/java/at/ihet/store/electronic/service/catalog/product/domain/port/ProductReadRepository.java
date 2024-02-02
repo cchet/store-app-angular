@@ -9,4 +9,6 @@ public interface ProductReadRepository {
     List<ProductDto> list();
 
     ProductDto byId(String id);
+
+    List<ProductDto> byIds(List<String> id);
 }

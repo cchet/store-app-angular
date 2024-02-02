@@ -18,28 +18,22 @@
       "@store-ui/api": ["libs/order/api/src/index.ts"],
       "@store-ui/cart-domain": ["libs/cart/domain/src/index.ts"],
       "@store-ui/cart-state": ["libs/cart/state/src/index.ts"],
+      "@store-ui/cart-view": ["libs/cart/ui/cart-view/src/index.ts"],
       "@store-ui/domain": ["libs/order/domain/src/index.ts"],
-      "@store-ui/feature-product-list": [
-        "libs/product/features/product-list/src/index.ts"
-      ],
-      "@store-ui/feature-product-view": [
-        "libs/product/features/product-view/src/index.ts"
-      ],
+      "@store-ui/feature-cart-overview": ["libs/cart/features/cart-overview/src/index.ts"],
+      "@store-ui/feature-cart-payment": ["libs/cart/features/cart-payment/src/index.ts"],
+      "@store-ui/feature-product-list": ["libs/product/features/product-list/src/index.ts"],
+      "@store-ui/feature-product-view": ["libs/product/features/product-view/src/index.ts"],
       "@store-ui/home-ui": ["libs/home/ui/src/index.ts"],
+      "@store-ui/order-proxy": ["libs/order/proxy/src/index.ts"],
       "@store-ui/product-domain": ["libs/product/domain/src/index.ts"],
       "@store-ui/product-proxy": ["libs/product/proxy/src/index.ts"],
       "@store-ui/shared-domain": ["libs/shared/domain/src/index.ts"],
       "@store-ui/shared-model": ["libs/shared/domain/src/index.ts"],
-      "@store-ui/shared-ui-navigation": [
-        "libs/shared/ui-navigation/src/index.ts"
-      ],
+      "@store-ui/shared-ui-navigation": ["libs/shared/ui-navigation/src/index.ts"],
       "@store-ui/ui": ["libs/order/ui/src/index.ts"],
-      "@store-ui/ui-product-view": [
-        "libs/product/ui/product-view/src/index.ts"
-      ],
-      "@store-ui/ui-products-view": [
-        "libs/product/ui/products-view/src/index.ts"
-      ],
+      "@store-ui/ui-product-view": ["libs/product/ui/product-view/src/index.ts"],
+      "@store-ui/ui-products-view": ["libs/product/ui/products-view/src/index.ts"],
       "@store-ui/util": ["libs/order/util/src/index.ts"]
     }
   },

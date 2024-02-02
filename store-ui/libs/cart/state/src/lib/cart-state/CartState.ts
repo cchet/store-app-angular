@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartItem, CartPort } from '@store-ui/cart-domain';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CartState extends CartPort {
   private items: CartItem[] = [];
@@ -37,6 +37,23 @@ export class CartState extends CartPort {
 
   override list(): readonly CartItem[] {
     return this.items;
+  }
+
+  forId(id: string): CartItem {
+    const item = this.findItem(id);
+    if (item == null) {
+      throw Error(`No item for id: '${id}' found`);
+    }
+    return item;
+  }
+
+
+  listProductIds(): readonly string[] {
+    return this.items.map(item => item.id);
+  }
+
+  override isEmpty(): boolean {
+    return this.items.length == 0;
   }
 
   private findItem(id: string): CartItem | null {

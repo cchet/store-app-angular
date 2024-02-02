@@ -1,15 +1,19 @@
 {
+  "global": {
+    "loading": "Loading..."
+  },
   "nav": {
     "header": "Store",
     "home": "Startseite",
     "products": "Produkte",
-    "orders": "Bestellungen"
+    "orders": "Bestellungen",
+    "cart": "Warenkorb"
   },
   "view": {
     "home": {
       "welcome": "Wilkommen in meinem Store"
     },
-    "product": {
+    "products": {
       "table": {
         "header": {
           "id": "Nummer",
@@ -20,6 +24,53 @@
           "tax": "Mwst"
         },
         "no-entries": "Es sind keine Produkte verfügbar"
+      },
+      "button": {
+        "addToCart": "In den Warenkorb"
+      },
+      "success": {
+        "addedToCart": "Produkt wurde zum Warenkorb hinzugefügt"
+      },
+      "error": {
+        "cannotViewProduct": "Product kann nicht angezeigt werden"
+      }
+    },
+    "product": {
+      "label": {
+        "tax": "Mwst",
+        "priceWithoutTax": "Netto",
+        "priceWithTax": "Brutto"
+      },
+      "button": {
+        "addToCart": "In den Warenkorb"
+      },
+      "success": {
+        "addedToCart": "Produkt wurde zum Warenkorb hinzugefügt"
+      },
+      "error": {
+        "cannotViewProduct": "Product kann nicht angezeigt werden"
+      }
+    },
+    "cart": {
+      "header": "Warenkorb",
+      "table": {
+        "header": {
+          "productId": "Produkt-Id",
+          "name": "Name",
+          "singlePrice": "Einzelpreis",
+          "singleTax": "Mwst-Einzel",
+          "count": "Anzahl",
+          "fullPriceNoTax": "Gesamt-Netto",
+          "fullTax": "Mwst-Gesamt",
+          "fullPrice": "Gesamt"
+        },
+        "footer": {
+          "total": "Gesamt"
+        },
+        "no-entries": "Keine Produkte im Warenkorb vorhanden"
+      },
+      "button": {
+        "order": "Bestellen"
       }
     }
   }

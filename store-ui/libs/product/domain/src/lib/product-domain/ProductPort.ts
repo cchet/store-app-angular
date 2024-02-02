@@ -6,7 +6,7 @@ export abstract class ProductPort {
 
   abstract byId(id: string | null): Observable<Product>;
 
-  abstract byIds(ids: string[]): Observable<Product[]>;
+  abstract byIds(ids: readonly string[]): Observable<Product[]>;
 }
 
 
