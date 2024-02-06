@@ -21,7 +21,14 @@ export const globalConfiguration = {
         'cart'
     }
   },
-  PAGE_ROUTER_URI: {
-    product: 'product/:id'
+  innerLinks: {
+    productDetail: {
+      routeURI: 'product/:id',
+      routeLink: (productId: string): string => `/product/${productId}`
+    },
+    payment: {
+      routeURI: 'payment/:id',
+      routeLink: (paymentId: string): string => `/payment/${paymentId}`
+    }
   }
 };

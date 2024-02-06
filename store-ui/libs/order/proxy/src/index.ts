@@ -1,1 +1,1 @@
-export * from './lib/order-proxy/order-proxy.component';
+export * from './lib/order-proxy/OrderProxy';

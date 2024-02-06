@@ -14,4 +14,7 @@ public class ApplicationConfiguration {
 
     @Value("${order.queue.payment}")
     public String queueNamePayment;
+
+    @Value("${order.queue.catalog}")
+    public String queueNameCatalog;
 }

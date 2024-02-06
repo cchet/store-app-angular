@@ -1,1 +1,1 @@
-export * from './lib/cart-view/cart-view.component';
+export * from './lib/cart-view/ui-cart-view.component';

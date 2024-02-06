@@ -25,7 +25,7 @@ class OrderCreatedEventListener {
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     void publishOrderCreatedEvent(final OrderCreatedEvent event) {
-        log.info("Order created with id: " + event.orderId());
+        log.info("Order created with id: " + event.order().getId());
         orderEventPublisher.publishOrderCreated(event);
     }
 }

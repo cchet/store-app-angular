@@ -4,7 +4,8 @@ import { OrderUiComponent } from '@store-ui/ui';
 import { HomeUiComponent } from '@store-ui/home-ui';
 import { UiProductsViewComponent } from '@store-ui/ui-products-view';
 import { UiProductViewComponent } from '@store-ui/ui-product-view';
-import { CartViewComponent } from '@store-ui/cart-view';
+import { UiCartViewComponent } from '@store-ui/cart-view';
+import { UiPaymentViewComponent } from '@store-ui/payment-view';
 
 export const appRoutes: Route[] = [
   {
@@ -26,10 +27,14 @@ export const appRoutes: Route[] = [
   },
   {
     path: globalConfiguration.navLinks.cart.uri,
-    component: CartViewComponent,
+    component: UiCartViewComponent,
   },
   {
-    path: globalConfiguration.PAGE_ROUTER_URI.product,
+    path: globalConfiguration.innerLinks.productDetail.routeURI,
     component: UiProductViewComponent,
+  },
+  {
+    path: globalConfiguration.innerLinks.payment.routeURI,
+    component: UiPaymentViewComponent,
   },
 ];

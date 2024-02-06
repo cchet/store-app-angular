@@ -6,10 +6,16 @@ import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "product")
+@NamedQueries({
+        @NamedQuery(name = "product.listAll", query = "select product from ProductEntity product left outer join fetch product.reservations"),
+        @NamedQuery(name = "product.finByIdWithReservations", query = "select distinct product from ProductEntity product left outer join fetch product.reservations where product.id = :id")
+})
 class ProductEntity {
 
     @Id
@@ -48,6 +54,11 @@ class ProductEntity {
     @Column(name = "modification_date")
     @Temporal(TemporalType.TIMESTAMP)
     public LocalDateTime modificationDate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = {
+            CascadeType.ALL
+    })
+    public List<ProductReservationEntity> reservations = new ArrayList<>(0);
 
     @PreUpdate
     void onUpdate() {

@@ -14,6 +14,8 @@ import { CartPort } from '@store-ui/cart-domain';
 import { CartState, ProductEventObserver } from '@store-ui/cart-state';
 import { StoreConfigPort } from '@store-ui/shared-domain';
 import { environment } from '../environments/environment';
+import { OrderPort } from '@store-ui/domain';
+import { OrderProxy } from '../../libs/order/proxy/src/lib/order-proxy/OrderProxy';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,7 @@ export const appConfig: ApplicationConfig = {
     { provide: StoreConfigPort, useExisting: StoreConfigProxy },
     { provide: ProductPort, useExisting: ProductProxy },
     { provide: CartPort, useExisting: CartState },
+    { provide: OrderPort, useExisting: OrderProxy },
     { provide: ProductEventObserver },
     // Initializer for preloading the i18n files
     {

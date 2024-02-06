@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
+import { globalConfiguration } from '@store-ui/shared-model';
 
 @Component({
   selector: 'store-ui-feature-product-list',
@@ -26,4 +27,6 @@ export class FeatureProductListComponent implements OnInit {
   ngOnInit(): void {
     this.products$ = this.productPort.list();
   }
+
+  protected readonly globalConfiguration = globalConfiguration;
 }

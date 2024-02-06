@@ -12,7 +12,7 @@
   <tbody>
     @for (product of products$ | async; track product.id;) {
       <tr>
-        <td><a [routerLink]="'/product/' + product.id" class="detail-link"><fa-icon [icon]="iconDetail"></fa-icon></a>{{ product.id }}</td>
+        <td><a [routerLink]="globalConfiguration.innerLinks.productDetail.routeLink(product.id)" class="detail-link"><fa-icon [icon]="iconDetail"></fa-icon></a>{{ product.id }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.type }}</td>
         <td>{{ product.price | currency }}</td>

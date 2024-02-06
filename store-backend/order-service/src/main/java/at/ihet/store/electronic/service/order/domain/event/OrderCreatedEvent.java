@@ -1,17 +1,14 @@
 package at.ihet.store.electronic.service.order.domain.event;
 
+import at.ihet.store.electronic.service.order.domain.Order;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
-public record OrderCreatedEvent(UUID orderId, BigDecimal amount) {
+public record OrderCreatedEvent(Order order) {
 
-    public OrderCreatedEvent(UUID orderId, BigDecimal amount) {
-        this.orderId = Objects.requireNonNull(orderId);
-        this.amount = Objects.requireNonNull(amount);
-    }
-
-    public static OrderCreatedEvent of(final UUID orderId, final BigDecimal amount) {
-        return new OrderCreatedEvent(orderId, amount);
+    public OrderCreatedEvent(Order order) {
+        this.order = Objects.requireNonNull(order);
     }
 }
